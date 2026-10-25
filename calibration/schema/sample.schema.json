@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/JasonWithMiracle/workbuddy-quota-guard/calibration/schema/sample.schema.json",
+  "title": "限额校准样本",
+  "description": "单条实测限额样本，贡献到社区校准池。必须脱敏：不得包含账号标识、会话内容、本机绝对路径。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contributor",
+    "model",
+    "observed_at",
+    "window_hours",
+    "limits",
+    "method"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "样本格式版本。破坏性变更时递增。"
+    },
+    "contributor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]{3,40}$",
+          "description": "贡献者匿名标识（GitHub 用户名或自选别名）。用于判定「独立贡献者」数量，不得包含邮箱等可识别信息。"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["human", "inferred"],
+          "description": "human=人工实测锚点（已知消耗下触发 429）；inferred=由本工具自动反推的样本"
+        },
+        "client_version": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "WorkBuddy/CodeBuddy 客户端版本（可选）。限额可能随版本调整。"
+        }
+      }
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "模型标识，与日志中的 providerData.model 一致。"
+    },
+    "observed_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "样本观测日期（YYYY-MM-DD）。不精确到时分以减少可识别性。"
+    },
+    "window_hours": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 168,
+      "description": "该限额对应的滚动窗口长度（小时）。实测多为 24。"
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "观测到的限额值。至少提供一项非零值。",
+      "properties": {
+        "tokens_M": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100000,
+          "description": "限额对应的 token 数（单位：百万 token）。"
+        },
+        "credit": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000000,
+          "description": "限额对应的 credit 数。"
+        },
+        "requests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000000,
+          "description": "限额对应的请求次数。"
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "samples"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["manual-anchor", "auto-inferred"],
+          "description": "manual-anchor=人工锚点（已知确切消耗时触发 429，可信度最高）；auto-inferred=工具按窗口下界反推"
+        },
+        "samples": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000,
+          "description": "该结论背后参与统计的样本数（429 事件个数）。样本越多越可信。"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "补充说明（可选）。不得包含本机路径、账号、会话内容。"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "可追溯信息（可选）。",
+      "properties": {
+        "issue": {
+          "type": "string",
+          "pattern": "^\\d+$",
+          "description": "关联的 GitHub issue 编号，便于讨论与追溯。"
+        },
+        "run_id": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "本工具运行时的 run 标识或 commit，便于复现。"
+        }
+      }
+    }
+  }
+}

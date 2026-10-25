@@ -6,7 +6,7 @@ description_zh: "WorkBuddy/CodeBuddy 配额感知器：反推各模型 429 限�
 description_en: "WorkBuddy/CodeBuddy quota guard: reverse-engineer per-model 429 limits, estimate remaining quota, generate handoff docs and dashboards."
 agent_created: true
 type: tool
-version: "1.0.1"
+version: "1.1.0"
 license: MIT
 ---
 
@@ -23,6 +23,8 @@ license: MIT
 - 输出当前各模型的用量占比与风险等级（low / medium / high）
 - 生成 HTML 看板与 429 断点交接文档
 - 供 Hook 在会话开始时做自动预警
+- 读取**社区校准参考表**（多人交叉验证过的限额值），优先于本机反推值
+- 生成本机的**校准样本**（脱敏），供用户提交到社区校准池
 
 **本 Skill 不做什么**
 
@@ -53,6 +55,7 @@ python "$SKILL_DIR/scripts/quota_guard.py" status
 | 「生成交接文档」（429 中断时） | `handoff` |
 | 「打开看板看看」 | `dashboard` |
 | 「全套产物都出一份」 | `all` |
+| 「帮我校准一下限额」「贡献一份实测数据」 | `calibrate sample --contributor <id>` |
 
 ### 第 3 步：解读并汇报
 
@@ -61,7 +64,8 @@ python "$SKILL_DIR/scripts/quota_guard.py" status
 1. **优先报 `risk` 为 `high` 的模型** —— 这是最可能马上撞 429 的；
 2. 给出 `usage_ratio`（已用占比）与 `next_reset`（下次重置时刻）；
 3. 若某模型 `limit_*` 为 `None` / `usage_ratio` 未知，说明**该模型限额样本不足**，如实告知「暂无法估算」，不要编造数字；
-4. 若用户提到「任务被 429 打断了」，立即追加执行 `handoff` 生成交接文档。
+4. 若用户提到「任务被 429 打断了」，立即追加执行 `handoff` 生成交接文档；
+5. 汇报时说明限额值的来源：`limit_source` 为 `community-reference` 表示用的是社区交叉验证值（更可信），`local-inferred` 表示用的是本机反推值。
 
 ## 常用命令
 
@@ -80,6 +84,12 @@ python scripts/quota_guard.py dashboard --out ./out
 
 # 全套产物
 python scripts/quota_guard.py all --out ./out
+
+# 生成本机校准样本（脱敏，可提交到社区校准池）
+python scripts/quota_guard.py calibrate sample --contributor <你的匿名标识>
+
+# 校验本地校准样本
+python scripts/quota_guard.py calibrate validate
 ```
 
 ## 输出产物
@@ -90,6 +100,17 @@ python scripts/quota_guard.py all --out ./out
 | `status.json` | 当前滚动窗口各模型用量占比与风险等级 |
 | `quota_report.html` | 可视化看板，浏览器直接打开 |
 | `handoff.md` | 五段式断点交接文档 |
+| `calibration-sample/*.json` | 本机校准样本（脱敏），可提交到社区校准池 |
+
+## 社区校准
+
+限额是**统计下界**估计，精度靠社区共同校准。本 Skill 目录下的 `calibration/` 存放：
+
+- `reference.json` —— 社区交叉验证过的参考限额表（随版本分发，优先于本机反推值）
+- `schema/sample.schema.json` —— 校准样本格式
+- `README.md` —— 贡献指南与采纳规则
+
+> 采纳规则：同一模型同一窗口下需 ≥2 个独立贡献者，且剔除少数派离群者后各维度相对离散度 ≤25%。
 
 ## 汇报模板
 
@@ -118,7 +139,8 @@ python scripts/quota_guard.py all --out ./out
 
 - 只读访问本地文件，**绝不写入或删除** WorkBuddy 数据目录；
 - 生成产物默认写到 `--out` 指定目录，**不要**写进用户的知识库仓库；
-- 产物含本机统计信息，**不要**主动贴到公开场合或提交到 Git。
+- 产物含本机统计信息，**不要**主动贴到公开场合或提交到 Git；
+- 校准样本会**公开**在社区仓库里 —— 生成后必须确认不含账号 UUID、邮箱、会话内容、本机绝对路径。
 
 ## 详细文档
 

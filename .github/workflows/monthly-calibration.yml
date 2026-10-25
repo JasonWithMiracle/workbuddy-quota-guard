@@ -1,0 +1,105 @@
+name: Monthly calibration release
+
+# 每月自动检查校准数据池：有新数据则构建补丁版本并发布 Release；
+# 无变更则静默跳过（不产生空版本）。
+#
+# 手动触发：Actions 页面 → Monthly calibration release → Run workflow
+on:
+  schedule:
+    # 每月 1 日 03:17 UTC（避开整点，减少 GitHub 调度拥塞）
+    - cron: "17 3 1 * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "即使无变更也发布（默认 false）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Check and publish
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate calibration pool
+        run: python scripts/calibration_check.py
+
+      - name: Generate reference table
+        run: |
+          mkdir -p /tmp/cal-out
+          PYTHONPATH=src python -m wb_quota_guard calibrate publish \
+            --calibration-dir calibration \
+            --out /tmp/cal-out
+
+      - name: Detect changes
+        id: detect
+        run: |
+          set -euo pipefail
+          NEW=$(cat /tmp/cal-out/reference.json)
+          if [ -f calibration/reference.json ]; then
+            OLD=$(cat calibration/reference.json)
+          else
+            OLD='{}'
+          fi
+          if [ "$NEW" != "$OLD" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "校准数据有变更，准备发布"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "校准数据无变更，跳过发布"
+          fi
+
+      - name: Skip when no change
+        if: steps.detect.outputs.changed != 'true' && inputs.force != true
+        run: |
+          echo "无变更，跳过。"
+          echo "如需强制发布，请手动触发并勾选 force。"
+
+      - name: Commit reference table
+        if: steps.detect.outputs.changed == 'true' || inputs.force == true
+        run: |
+          mkdir -p calibration
+          cp /tmp/cal-out/reference.json calibration/reference.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add calibration/reference.json
+          if git diff --cached --quiet; then
+            echo "无文件变化，跳过提交"
+            echo "skip_commit=true" >> "$GITHUB_ENV"
+          else
+            git commit -m "chore(calibration): 更新社区参考限额表 [skip ci]"
+            git push
+            echo "skip_commit=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Create release
+        if: steps.detect.outputs.changed == 'true' || inputs.force == true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VERSION="v$(python -c 'import datetime; d = datetime.date.today(); print(f"{d.year}.{d.month}")')"
+          TAG="$VERSION"
+          # 版本号已存在则跳过
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "标签 $TAG 已存在，跳过发布"
+            exit 0
+          fi
+          git tag -a "$TAG" -m "校准数据更新 $TAG"
+          git push origin "$TAG"
+
+          python scripts/gen_release_notes.py \
+            --reference calibration/reference.json \
+            --out /tmp/notes.md
+
+          gh release create "$TAG" --title "$TAG — 校准数据更新" --notes-file /tmp/notes.md

@@ -347,12 +347,15 @@ def analyze():
     return limits, usage, events
 
 
-def current_status(limits, usage, events):
+def current_status(limits, usage, events, reference=None):
     """
     按「账号 × 模型」估算当前滚动窗口用量。
 
     窗口语义：滚动 W 小时（W = 观察到的窗口长度中位数 ≈ 24h）。
     每个模型独立计算自己在过去 W 小时内的消耗，与该模型的历史限额下界对比。
+
+    ``reference`` 为可选的社区校准参考表（``{模型名: {"limits": {...}, "confidence": ...}}``）。
+    提供时以参考值优先（社区多贡献者交叉验证过的更可信），否则回落到本地反推值。
     """
     now = datetime.now(CST).timestamp()
     W = (limits.get("thresholds", {}).get("window_hours_median") or 24.0) * 3600
@@ -370,6 +373,21 @@ def current_status(limits, usage, events):
         lim = per_model_limits.get(m, {})
         lim_tok = lim.get("median_tokens_M")
         lim_cred = lim.get("median_credit")
+        limit_source = "local-inferred"
+        confidence = None
+
+        # 社区校准参考值优先
+        ref = (reference or {}).get(m)
+        if ref:
+            rl = ref.get("limits", {})
+            if rl.get("tokens_M"):
+                lim_tok = rl["tokens_M"]
+                limit_source = "community-reference"
+            elif rl.get("credit"):
+                lim_cred = rl["credit"]
+                limit_source = "community-reference"
+            confidence = ref.get("confidence")
+
         ratio = None
         risk = "unknown"
         if lim_tok:
@@ -398,6 +416,8 @@ def current_status(limits, usage, events):
             "risk": risk,
             "next_reset": nxt or "未知",
             "hits_429": limits.get("per_model_429", {}).get(m, 0),
+            "limit_source": limit_source,
+            "confidence": confidence,
         })
     rows.sort(key=lambda r: (r["usage_ratio"] is None, -(r["usage_ratio"] or 0)))
     status = {

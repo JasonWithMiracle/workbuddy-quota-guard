@@ -33,6 +33,7 @@
 | 🖥️ 可视化看板 | 自适应暗色 HTML 看板，浏览器直接打开 |
 | 🪝 Hook 预警 | 会话启动时自动检查，高风险模型提前喊话 |
 | 🧩 Skill 化 | 可作为 WorkBuddy Skill 安装，一条指令调用 |
+| 🤝 社区校准 | 多人交叉验证的参考限额表，优先于单机反推值 |
 | 🔒 隐私优先 | **只读**本地文件；代码公开、**数据永不入库** |
 
 ---
@@ -113,6 +114,52 @@ WorkBuddy 的限额窗口是**滚动 24 小时**，不是固定时段的自然�
 
 ---
 
+## 社区校准池
+
+限额是从「该模型触发 429 时的滚动窗口内消耗」反推出来的，天然是**统计下界**，
+且用得少的模型样本稀疏、误差大。**精度需要社区一起校准。**
+
+本项目维护一个开放的校准数据池：
+
+```
+你的实测样本  ──▶  PR 提交  ──▶  CI 校验  ──▶  多人交叉验证  ──▶  月度发布
+                                                    │
+                          只有满足「≥2 个独立贡献者且一致」的模型才进参考表
+```
+
+**采纳规则**（防止单条错误数据影响所有人）：
+
+| 条件 | 说明 |
+|---|---|
+| ≥2 个独立贡献者 | 同一人的多条样本折叠为一条代表值，不构成交叉验证 |
+| 相对离散度 ≤ 25% | 各贡献者代表值相对中位数的偏差上限 |
+| 剔除少数派离群者 | 偏离超 3 倍容差者被剔除；若离群者是多数派则不剔除，判为整体冲突 |
+| 人工锚点权重 ×3 | 已知确切消耗时触发 429 的样本更可信，但同样需交叉验证 |
+
+未达标的样本不会丢失，会落入 `conflicts` 区标注分歧原因。
+
+**参与方式**：
+
+```bash
+# 1. 生成本机样本（自动脱敏）
+python -m wb_quota_guard calibrate sample --contributor your-id
+
+# 2. 本地校验
+python scripts/calibration_check.py
+
+# 3. 放到 calibration/samples/ 后提 PR
+```
+
+贡献指南详见 [`calibration/README.md`](calibration/README.md)，样本格式见
+[`calibration/schema/sample.schema.json`](calibration/schema/sample.schema.json)。
+
+> 校准样本会**公开**在仓库里。请勿包含账号 UUID、邮箱、会话内容或本机绝对路径 ——
+> CI 会自动拦截（`scripts/calibration_check.py` + `scripts/hygiene_check.py` 双层校验）。
+
+**收益**：所有使用者都能直接获得多人验证过的限额值，无需自己积累数百个 429 事件。
+
+---
+
 ## 数据来源与隐私
 
 本项目**只读**访问以下本地路径：
@@ -183,17 +230,30 @@ WorkBuddy 的限额窗口是**滚动 24 小时**，不是固定时段的自然�
 workbuddy-quota-guard/
 ├── src/wb_quota_guard/       # Python 包（纯标准库）
 │   ├── core.py               # 扫描 / 限额反推 / 状态评估
+│   ├── calibration.py        # 校准样本校验 + 聚合引擎
 │   ├── report.py             # 看板 + 交接文档生成
 │   ├── cli.py                # 命令行入口
 │   └── __main__.py
+├── calibration/              # 社区校准数据池
+│   ├── README.md             # 贡献指南与采纳规则
+│   ├── reference.json        # 聚合产出的参考限额表（随版本分发）
+│   ├── schema/               # 样本 JSON Schema
+│   └── samples/              # 社区提交的校准样本
+├── tests/                    # 单元测试（标准库 unittest）
+│   └── test_calibration.py
 ├── skill/                    # WorkBuddy Skill 包
 │   ├── SKILL.md
 │   ├── 使用说明.md
+│   ├── calibration/          # Skill 内置的参考表与样本格式
 │   └── references/
 ├── hooks/                    # Hook 脚本（Node）
+├── scripts/                  # 可本地运行的 CI 脚本
+│   ├── hygiene_check.py      # 隐私卫生
+│   ├── calibration_check.py  # 校准池门禁
+│   └── gen_release_notes.py  # 月度发布说明生成
 ├── docs/                     # 方法论 / 错误码 / Roadmap
 ├── examples/                 # 示例产物（脱敏）
-└── .github/workflows/        # CI
+└── .github/workflows/        # CI + 月度校准发布
 ```
 
 ---
@@ -216,6 +276,9 @@ workbuddy-quota-guard/
 
 ```bash
 python scripts/hygiene_check.py    # 隐私卫生
+python scripts/calibration_check.py # 校准池门禁
+python tests/test_calibration.py    # 单元测试
+python -m compileall -q src/ scripts/
 python -m compileall -q src/ scripts/
 node --check hooks/quota-precheck.js
 ```
