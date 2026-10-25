@@ -87,7 +87,7 @@ python -m wb_quota_guard calibrate sample --contributor <你的匿名标识>
 样本会被**公开**在仓库里，因此：
 
 - ❌ 不得包含账号 UUID、邮箱、会话内容、请求内容
-- ❌ 不得包含本机绝对路径（`C:\Users\...`、`/Users/...`、`/home/...`）
+- ❌ 不得包含本机绝对路径（Windows 用户目录、macOS `/Users/` 下的家目录、Linux `/home/` 下的家目录）
 - ❌ 不得包含任何密钥字面量
 - ✅ `contributor.id` 用 GitHub 用户名或自选别名即可，**不必提供真实身份**
 

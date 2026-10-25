@@ -55,11 +55,13 @@ _CONFIDIENT_ID = re.compile(r"^[a-z0-9-]{3,40}$")
 _ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 #: 样本中绝对不允许出现的隐私痕迹（与 hygiene_check.py 口径一致）
+#:
+#: 注意：此处只写**通用**的形态规则，不硬编码任何特定用户的目录名 ——
+#: 开源库不应知道某个用户的 vault 布局。
 _FORBIDDEN_PATTERNS = (
     (re.compile(r"[A-Za-z]:[\\/]Users[\\/]"), "Windows 用户目录绝对路径"),
     (re.compile(r"/Users/[A-Za-z0-9._-]+/"), "macOS 用户目录绝对路径"),
     (re.compile(r"/home/[A-Za-z0-9._-]+/"), "Linux home 绝对路径"),
-    (re.compile(r"ObsidianCatalogue"), "本机 vault 路径"),
     (re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.I), "账号 UUID"),
     (re.compile(r"ghp_|github_pat_|sk-|AKIA"), "密钥字面量"),
     (re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+"), "邮箱地址"),

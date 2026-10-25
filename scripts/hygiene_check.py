@@ -56,8 +56,13 @@ SECRET_PATTERNS = [
 ]
 
 #: 允许出现上述特征的文件（示例数据、说明文档中引用格式说明）
+#:
+#: 说明：这些文件**测试**隐私规则，内容中出现路径形态是测试用例的一部分，
+#: 而非真实的本机痕迹。规则定义所在的源码一律不豁免 ——
+#: 通用开源库不应硬编码任何特定用户的目录名。
 ALLOWLIST = {
-    "scripts/hygiene_check.py",
+    "scripts/hygiene_check.py",          # 规则定义自身
+    "tests/test_calibration.py",          # 隐私校验的测试用例（含故意违规样本）
 }
 
 
