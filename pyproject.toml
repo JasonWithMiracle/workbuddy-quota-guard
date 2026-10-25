@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "workbuddy-quota-guard"
+version = "1.0.0"
+description = "WorkBuddy/CodeBuddy 配额感知器：反推各模型 429 限额、预警剩余额度、生成断点交接文档"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["workbuddy", "codebuddy", "quota", "rate-limit", "429", "llm", "observability"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Debuggers",
+]
+
+# 纯标准库实现，零第三方依赖
+dependencies = []
+
+[project.scripts]
+wb-quota-guard = "wb_quota_guard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/JasonWithMiracle/workbuddy-quota-guard"
+Repository = "https://github.com/JasonWithMiracle/workbuddy-quota-guard"
+Issues = "https://github.com/JasonWithMiracle/workbuddy-quota-guard/issues"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

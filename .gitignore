@@ -1,0 +1,37 @@
+# 本地数据、缓存与产物 —— 绝不提交
+/quota-guard-out/
+/out/
+/output/
+*.local.json
+
+# 运行时生成的产物（限额表 / 状态 / 交接文档 / 看板），仅忽略仓库根目录
+/limits.json
+/status.json
+/handoff.md
+/quota_report.html
+/dashboard.html
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+package-lock.json
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# 日志与临时文件
+*.log
+*.tmp

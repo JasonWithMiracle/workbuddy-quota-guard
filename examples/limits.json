@@ -1,0 +1,1302 @@
+{
+  "generated_at": "2026-10-25T19:11:58.000987+08:00",
+  "error_code_catalog": {
+    "6004": {
+      "category": "quota",
+      "sub": "quota_token_limit",
+      "zh": "Token 频率限额（按窗口重置）"
+    },
+    "6000": {
+      "category": "quota",
+      "sub": "quota_token_limit",
+      "zh": "Token 频率限额（按窗口重置）"
+    },
+    "6005": {
+      "category": "quota",
+      "sub": "quota_request_limit",
+      "zh": "请求数频率限额"
+    },
+    "6006": {
+      "category": "quota",
+      "sub": "quota_request_limit",
+      "zh": "请求数频率限额"
+    },
+    "6007": {
+      "category": "quota",
+      "sub": "quota_request_limit",
+      "zh": "请求数频率限额"
+    },
+    "6008": {
+      "category": "quota",
+      "sub": "quota_request_limit",
+      "zh": "请求数频率限额"
+    },
+    "14001": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "14002": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "14003": {
+      "category": "quota",
+      "sub": "quota_request_limit",
+      "zh": "请求数限额"
+    },
+    "14012": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "14013": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "14014": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "14018": {
+      "category": "quota",
+      "sub": "quota_balance_exhausted",
+      "zh": "余额耗尽"
+    },
+    "10105": {
+      "category": "quota",
+      "sub": "quota_active_session",
+      "zh": "活跃会话超限"
+    },
+    "15001": {
+      "category": "quota",
+      "sub": "quota_web_search",
+      "zh": "联网搜索额度耗尽"
+    },
+    "6020": {
+      "category": "queue",
+      "sub": "queue_waiting",
+      "zh": "排队中（等待位）"
+    },
+    "6021": {
+      "category": "queue",
+      "sub": "queue_full",
+      "zh": "队列已满"
+    },
+    "6022": {
+      "category": "queue",
+      "sub": "queue_user_limit",
+      "zh": "用户并发超限"
+    },
+    "14016": {
+      "category": "quota",
+      "sub": "quota_not_activated",
+      "zh": "套餐未激活"
+    },
+    "14017": {
+      "category": "quota",
+      "sub": "quota_not_activated",
+      "zh": "套餐未激活"
+    }
+  },
+  "code_stats": {
+    "6004": {
+      "hits": 122,
+      "zh": "Token 频率限额（按窗口重置）",
+      "category": "quota"
+    },
+    "6000": {
+      "hits": 29,
+      "zh": "Token 频率限额（按窗口重置）",
+      "category": "quota"
+    },
+    "0": {
+      "hits": 25,
+      "zh": "未知",
+      "category": "unknown"
+    },
+    "6020": {
+      "hits": 18,
+      "zh": "排队中（等待位）",
+      "category": "queue"
+    },
+    "6022": {
+      "hits": 6,
+      "zh": "用户并发超限",
+      "category": "queue"
+    },
+    "1300": {
+      "hits": 2,
+      "zh": "未知",
+      "category": "unknown"
+    },
+    "6021": {
+      "hits": 2,
+      "zh": "队列已满",
+      "category": "queue"
+    },
+    "14003": {
+      "hits": 1,
+      "zh": "请求数限额",
+      "category": "quota"
+    }
+  },
+  "windows": [
+    {
+      "code": "6004",
+      "reset_at": "2026-08-20 11:56:30",
+      "window_hours": 24.0,
+      "hits": 16,
+      "credit": 399.52,
+      "total_tokens": 129453215,
+      "prompt_tokens": 128648379,
+      "requests": 882,
+      "by_model": {
+        "deepseek-v4-flash": 557,
+        "hy3": 193,
+        "sensenova-6.8-flash-lite": 132
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 20255496,
+          "requests": 193
+        },
+        "deepseek-v4-flash": {
+          "credit": 399.52,
+          "tokens": 93923152,
+          "requests": 557
+        },
+        "sensenova-6.8-flash-lite": {
+          "credit": 0.0,
+          "tokens": 15274567,
+          "requests": 132
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-21 12:02:09",
+      "window_hours": 24.09,
+      "hits": 8,
+      "credit": 493.76,
+      "total_tokens": 122928086,
+      "prompt_tokens": 122322259,
+      "requests": 983,
+      "by_model": {
+        "deepseek-v4-flash": 642,
+        "hy3": 186,
+        "glm-4.6v": 91,
+        "glm-4.5-air": 50,
+        "glm-5.3": 5,
+        "mistral-large-latest": 4,
+        "sensenova-6.8-flash-lite": 3,
+        "mistral-medium-3": 1
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 20312230,
+          "requests": 186
+        },
+        "deepseek-v4-flash": {
+          "credit": 493.76,
+          "tokens": 91714048,
+          "requests": 642
+        },
+        "glm-4.6v": {
+          "credit": 0.0,
+          "tokens": 6568699,
+          "requests": 91
+        },
+        "glm-4.5-air": {
+          "credit": 0.0,
+          "tokens": 2879786,
+          "requests": 50
+        },
+        "mistral-large-latest": {
+          "credit": 0.0,
+          "tokens": 402673,
+          "requests": 4
+        },
+        "mistral-medium-3": {
+          "credit": 0.0,
+          "tokens": 90875,
+          "requests": 1
+        },
+        "glm-5.3": {
+          "credit": 0.0,
+          "tokens": 607361,
+          "requests": 5
+        },
+        "sensenova-6.8-flash-lite": {
+          "credit": 0.0,
+          "tokens": 268340,
+          "requests": 3
+        },
+        "glm-5.2": {
+          "credit": 0.0,
+          "tokens": 84074,
+          "requests": 1
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-22 12:02:42",
+      "window_hours": 24.01,
+      "hits": 5,
+      "credit": 593.53,
+      "total_tokens": 150324674,
+      "prompt_tokens": 149729429,
+      "requests": 711,
+      "by_model": {
+        "deepseek-v4-flash": 382,
+        "hy3": 185,
+        "hy3-x": 144
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 19995324,
+          "requests": 185
+        },
+        "deepseek-v4-flash": {
+          "credit": 557.32,
+          "tokens": 114121800,
+          "requests": 382
+        },
+        "hy3-x": {
+          "credit": 36.21,
+          "tokens": 16207550,
+          "requests": 144
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-24 21:55:30",
+      "window_hours": 57.88,
+      "hits": 2,
+      "credit": 20.9,
+      "total_tokens": 23612303,
+      "prompt_tokens": 23343510,
+      "requests": 279,
+      "by_model": {
+        "hy3": 192,
+        "hy3-x": 87
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 16109540,
+          "requests": 192
+        },
+        "hy3-x": {
+          "credit": 20.9,
+          "tokens": 7502763,
+          "requests": 87
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-25 23:50:24",
+      "window_hours": 25.91,
+      "hits": 5,
+      "credit": 245.95,
+      "total_tokens": 94873685,
+      "prompt_tokens": 93709007,
+      "requests": 942,
+      "by_model": {
+        "hy3-x": 728,
+        "hy3": 214
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 245.95,
+          "tokens": 74862610,
+          "requests": 728
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 20011075,
+          "requests": 214
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-26 23:50:24",
+      "window_hours": 24.0,
+      "hits": 1,
+      "credit": 191.88,
+      "total_tokens": 84583183,
+      "prompt_tokens": 83583876,
+      "requests": 798,
+      "by_model": {
+        "hy3-x": 554,
+        "hy3": 221,
+        "glm-4.6v": 17,
+        "MiniMaxAI/MiniMax-M3": 6
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 20102556,
+          "requests": 221
+        },
+        "hy3-x": {
+          "credit": 191.88,
+          "tokens": 62838730,
+          "requests": 554
+        },
+        "MiniMaxAI/MiniMax-M3": {
+          "credit": 0.0,
+          "tokens": 384655,
+          "requests": 6
+        },
+        "glm-4.6v": {
+          "credit": 0.0,
+          "tokens": 1257242,
+          "requests": 17
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-27 23:50:33",
+      "window_hours": 24.0,
+      "hits": 1,
+      "credit": 152.2,
+      "total_tokens": 73692513,
+      "prompt_tokens": 72742013,
+      "requests": 710,
+      "by_model": {
+        "hy3-x": 404,
+        "hy3": 236,
+        "glm-4.7": 58,
+        "glm-4.5-air": 12
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 25660400,
+          "requests": 236
+        },
+        "hy3-x": {
+          "credit": 152.2,
+          "tokens": 42238479,
+          "requests": 404
+        },
+        "glm-4.7": {
+          "credit": 0.0,
+          "tokens": 5126158,
+          "requests": 58
+        },
+        "glm-4.5-air": {
+          "credit": 0.0,
+          "tokens": 667476,
+          "requests": 12
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-28 23:50:40",
+      "window_hours": 24.0,
+      "hits": 7,
+      "credit": 83.02,
+      "total_tokens": 96104871,
+      "prompt_tokens": 95382372,
+      "requests": 715,
+      "by_model": {
+        "hy4-preview": 331,
+        "hy3": 208,
+        "hy3-x": 104,
+        "deepseek-v4-flash": 72
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 22201928,
+          "requests": 208
+        },
+        "hy3-x": {
+          "credit": 38.01,
+          "tokens": 10397872,
+          "requests": 104
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 43534649,
+          "requests": 331
+        },
+        "deepseek-v4-flash": {
+          "credit": 45.01,
+          "tokens": 19970422,
+          "requests": 72
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-08-29 15:58:45",
+      "window_hours": 16.13,
+      "hits": 3,
+      "credit": 3.93,
+      "total_tokens": 13191185,
+      "prompt_tokens": 12983624,
+      "requests": 94,
+      "by_model": {
+        "hy3": 42,
+        "hy4-preview": 39,
+        "hy3-x": 13
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 3.93,
+          "tokens": 1429162,
+          "requests": 13
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 6594577,
+          "requests": 39
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 5167446,
+          "requests": 42
+        }
+      }
+    },
+    {
+      "code": "6000",
+      "reset_at": "2026-08-31 19:42:43",
+      "window_hours": 24.0,
+      "hits": 9,
+      "credit": 36.24,
+      "total_tokens": 37371886,
+      "prompt_tokens": 36996593,
+      "requests": 356,
+      "by_model": {
+        "hy3": 175,
+        "hy3-x": 91,
+        "hy4-preview": 90
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 36.24,
+          "tokens": 8542414,
+          "requests": 91
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 18305321,
+          "requests": 175
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 10524151,
+          "requests": 90
+        }
+      }
+    },
+    {
+      "code": "6000",
+      "reset_at": "2026-09-01 23:14:54",
+      "window_hours": 27.54,
+      "hits": 1,
+      "credit": 27.38,
+      "total_tokens": 48689123,
+      "prompt_tokens": 47912158,
+      "requests": 492,
+      "by_model": {
+        "hy3": 278,
+        "hy4-preview": 130,
+        "hy3-x": 84
+      },
+      "per_model_usage": {
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 13867225,
+          "requests": 130
+        },
+        "hy3-x": {
+          "credit": 27.38,
+          "tokens": 8408916,
+          "requests": 84
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 26412982,
+          "requests": 278
+        }
+      }
+    },
+    {
+      "code": "6000",
+      "reset_at": "2026-09-02 07:42:59",
+      "window_hours": 8.47,
+      "hits": 6,
+      "credit": 32.32,
+      "total_tokens": 41814659,
+      "prompt_tokens": 41141398,
+      "requests": 409,
+      "by_model": {
+        "hy3": 268,
+        "hy3-x": 91,
+        "hy4-preview": 50
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 22789176,
+          "requests": 268
+        },
+        "hy3-x": {
+          "credit": 32.32,
+          "tokens": 8295721,
+          "requests": 91
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 10729762,
+          "requests": 50
+        }
+      }
+    },
+    {
+      "code": "6000",
+      "reset_at": "2026-09-02 14:25:41",
+      "window_hours": 6.71,
+      "hits": 11,
+      "credit": 0.0,
+      "total_tokens": 10054438,
+      "prompt_tokens": 9930423,
+      "requests": 92,
+      "by_model": {
+        "hy4-preview": 92
+      },
+      "per_model_usage": {
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 10054438,
+          "requests": 92
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-02 20:14:58",
+      "window_hours": 100.27,
+      "hits": 19,
+      "credit": 105.58,
+      "total_tokens": 148149684,
+      "prompt_tokens": 146121358,
+      "requests": 1415,
+      "by_model": {
+        "hy3": 721,
+        "hy4-preview": 392,
+        "hy3-x": 266,
+        "glm-5.3-flash": 36
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 95.94,
+          "tokens": 25247051,
+          "requests": 266
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 67507479,
+          "requests": 721
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 52846751,
+          "requests": 392
+        },
+        "glm-5.3-flash": {
+          "credit": 9.64,
+          "tokens": 2548403,
+          "requests": 36
+        }
+      }
+    },
+    {
+      "code": "6000",
+      "reset_at": "2026-09-03 14:47:19",
+      "window_hours": 24.36,
+      "hits": 2,
+      "credit": 117.68,
+      "total_tokens": 83434119,
+      "prompt_tokens": 82343088,
+      "requests": 822,
+      "by_model": {
+        "hy3": 520,
+        "glm-5.3-flash": 121,
+        "hy4-preview": 108,
+        "hy3-x": 73
+      },
+      "per_model_usage": {
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 17837849,
+          "requests": 108
+        },
+        "glm-5.3-flash": {
+          "credit": 91.54,
+          "tokens": 19913266,
+          "requests": 121
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 38471141,
+          "requests": 520
+        },
+        "hy3-x": {
+          "credit": 26.14,
+          "tokens": 7211863,
+          "requests": 73
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-03 15:21:32",
+      "window_hours": 19.11,
+      "hits": 1,
+      "credit": 108.04,
+      "total_tokens": 73214541,
+      "prompt_tokens": 72202302,
+      "requests": 756,
+      "by_model": {
+        "hy3": 520,
+        "glm-5.3-flash": 85,
+        "hy4-preview": 78,
+        "hy3-x": 73
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 38471141,
+          "requests": 520
+        },
+        "hy3-x": {
+          "credit": 26.14,
+          "tokens": 7211863,
+          "requests": 73
+        },
+        "glm-5.3-flash": {
+          "credit": 81.9,
+          "tokens": 17364863,
+          "requests": 85
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 10166674,
+          "requests": 78
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-04 22:43:52",
+      "window_hours": 31.37,
+      "hits": 2,
+      "credit": 822.06,
+      "total_tokens": 264375698,
+      "prompt_tokens": 263672473,
+      "requests": 902,
+      "by_model": {
+        "glm-5.3-flash": 606,
+        "hy3": 195,
+        "hy3-x": 101
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 22214369,
+          "requests": 195
+        },
+        "glm-5.3-flash": {
+          "credit": 789.65,
+          "tokens": 231896699,
+          "requests": 606
+        },
+        "hy3-x": {
+          "credit": 32.41,
+          "tokens": 10264630,
+          "requests": 101
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-05 21:40:06",
+      "window_hours": 22.94,
+      "hits": 2,
+      "credit": 15.69,
+      "total_tokens": 14644259,
+      "prompt_tokens": 14442911,
+      "requests": 142,
+      "by_model": {
+        "hy3": 92,
+        "hy3-x": 40,
+        "hy4-preview": 10
+      },
+      "per_model_usage": {
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 10051415,
+          "requests": 92
+        },
+        "hy3-x": {
+          "credit": 15.69,
+          "tokens": 4081844,
+          "requests": 40
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 511000,
+          "requests": 10
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-06 20:21:25",
+      "window_hours": 22.69,
+      "hits": 1,
+      "credit": 84.81,
+      "total_tokens": 31634931,
+      "prompt_tokens": 31447717,
+      "requests": 188,
+      "by_model": {
+        "hy4-preview": 83,
+        "glm-5.3-flash": 73,
+        "hy3-x": 32
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 12.73,
+          "tokens": 3026442,
+          "requests": 32
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 9990172,
+          "requests": 83
+        },
+        "glm-5.3-flash": {
+          "credit": 72.08,
+          "tokens": 18618317,
+          "requests": 73
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-08 15:01:55",
+      "window_hours": 42.67,
+      "hits": 3,
+      "credit": 45.68,
+      "total_tokens": 42527778,
+      "prompt_tokens": 42183139,
+      "requests": 312,
+      "by_model": {
+        "hy4-preview": 149,
+        "hy3-x": 82,
+        "glm-5.3-flash": 57,
+        "hy3": 24
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 22.78,
+          "tokens": 6447103,
+          "requests": 82
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 28793920,
+          "requests": 149
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 1912580,
+          "requests": 24
+        },
+        "glm-5.3-flash": {
+          "credit": 22.9,
+          "tokens": 5374175,
+          "requests": 57
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-10 14:43:14",
+      "window_hours": 47.69,
+      "hits": 1,
+      "credit": 72.86,
+      "total_tokens": 63824290,
+      "prompt_tokens": 63485907,
+      "requests": 334,
+      "by_model": {
+        "hy4-preview": 114,
+        "deepseek-v4.1-flash": 111,
+        "hy3-x": 76,
+        "hy3": 19,
+        "glm-5.3-flash": 14
+      },
+      "per_model_usage": {
+        "glm-5.3-flash": {
+          "credit": 7.94,
+          "tokens": 1962934,
+          "requests": 14
+        },
+        "hy3-x": {
+          "credit": 22.34,
+          "tokens": 6167004,
+          "requests": 76
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 1135409,
+          "requests": 19
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 19797265,
+          "requests": 114
+        },
+        "deepseek-v4.1-flash": {
+          "credit": 42.58,
+          "tokens": 34761678,
+          "requests": 111
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-11 17:53:46",
+      "window_hours": 27.18,
+      "hits": 3,
+      "credit": 431.03,
+      "total_tokens": 270411558,
+      "prompt_tokens": 269442740,
+      "requests": 874,
+      "by_model": {
+        "deepseek-v4.1-flash": 675,
+        "glm-5.3-flash": 103,
+        "hy3": 49,
+        "hy3-x": 47
+      },
+      "per_model_usage": {
+        "deepseek-v4.1-flash": {
+          "credit": 218.98,
+          "tokens": 206960663,
+          "requests": 675
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 5492898,
+          "requests": 49
+        },
+        "glm-5.3-flash": {
+          "credit": 197.63,
+          "tokens": 53723367,
+          "requests": 103
+        },
+        "hy3-x": {
+          "credit": 14.42,
+          "tokens": 4234630,
+          "requests": 47
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-21 16:41:22",
+      "window_hours": 238.79,
+      "hits": 1,
+      "credit": 591.81,
+      "total_tokens": 285906464,
+      "prompt_tokens": 284628896,
+      "requests": 1114,
+      "by_model": {
+        "deepseek-v4.1-flash": 559,
+        "hy3-x": 433,
+        "hy4-preview": 122
+      },
+      "per_model_usage": {
+        "hy3-x": {
+          "credit": 122.55,
+          "tokens": 36067000,
+          "requests": 433
+        },
+        "deepseek-v4.1-flash": {
+          "credit": 144.16,
+          "tokens": 211558621,
+          "requests": 559
+        },
+        "hy4-preview": {
+          "credit": 325.1,
+          "tokens": 38280843,
+          "requests": 122
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-25 10:02:12",
+      "window_hours": 89.35,
+      "hits": 1,
+      "credit": 649.01,
+      "total_tokens": 498204970,
+      "prompt_tokens": 496335830,
+      "requests": 2735,
+      "by_model": {
+        "deepseek-v4.1-flash": 2356,
+        "hy3-x": 198,
+        "hy4-preview": 152,
+        "hy3": 29
+      },
+      "per_model_usage": {
+        "deepseek-v4.1-flash": {
+          "credit": 453.78,
+          "tokens": 455661512,
+          "requests": 2356
+        },
+        "hy3-x": {
+          "credit": 58.77,
+          "tokens": 17436250,
+          "requests": 198
+        },
+        "hy4-preview": {
+          "credit": 136.46,
+          "tokens": 21886423,
+          "requests": 152
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 3220785,
+          "requests": 29
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-26 08:00:00",
+      "window_hours": 21.96,
+      "hits": 1,
+      "credit": 209.28,
+      "total_tokens": 271682738,
+      "prompt_tokens": 271089192,
+      "requests": 616,
+      "by_model": {
+        "deepseek-v4.1-flash": 315,
+        "hy3": 128,
+        "hy4-preview": 98,
+        "hy3-x": 75
+      },
+      "per_model_usage": {
+        "deepseek-v4.1-flash": {
+          "credit": 185.02,
+          "tokens": 200157540,
+          "requests": 315
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 14254877,
+          "requests": 128
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 49937227,
+          "requests": 98
+        },
+        "hy3-x": {
+          "credit": 24.26,
+          "tokens": 7333094,
+          "requests": 75
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-26 10:07:13",
+      "window_hours": 2.12,
+      "hits": 3,
+      "credit": 0,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "requests": 0,
+      "by_model": {},
+      "per_model_usage": {}
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-26 23:41:09",
+      "window_hours": 13.57,
+      "hits": 3,
+      "credit": 235.67,
+      "total_tokens": 261875979,
+      "prompt_tokens": 260650219,
+      "requests": 980,
+      "by_model": {
+        "hy3-x": 409,
+        "deepseek-v4.1-flash": 388,
+        "hy3": 183
+      },
+      "per_model_usage": {
+        "deepseek-v4.1-flash": {
+          "credit": 98.47,
+          "tokens": 203086452,
+          "requests": 388
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 19939377,
+          "requests": 183
+        },
+        "hy3-x": {
+          "credit": 137.2,
+          "tokens": 38850150,
+          "requests": 409
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-09-27 10:26:25",
+      "window_hours": 10.75,
+      "hits": 2,
+      "credit": 9.33,
+      "total_tokens": 17216652,
+      "prompt_tokens": 17056173,
+      "requests": 155,
+      "by_model": {
+        "hy4-preview": 96,
+        "hy3-x": 32,
+        "hy3": 27
+      },
+      "per_model_usage": {
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 11446901,
+          "requests": 96
+        },
+        "hy3-x": {
+          "credit": 9.33,
+          "tokens": 2944063,
+          "requests": 32
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 2825688,
+          "requests": 27
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-10-25 22:26:39",
+      "window_hours": 684.0,
+      "hits": 27,
+      "credit": 2419.21,
+      "total_tokens": 1720101364,
+      "prompt_tokens": 1710662219,
+      "requests": 12102,
+      "by_model": {
+        "deepseek-v4.1-flash": 6083,
+        "space-bunny": 2815,
+        "minimax-m3.1-flash": 1229,
+        "hy3-x": 996,
+        "hy4-preview": 508,
+        "hy3": 249,
+        "step-5-preview": 222
+      },
+      "per_model_usage": {
+        "deepseek-v4.1-flash": {
+          "credit": 888.22,
+          "tokens": 872591824,
+          "requests": 6083
+        },
+        "hy3": {
+          "credit": 0.0,
+          "tokens": 22391200,
+          "requests": 249
+        },
+        "hy3-x": {
+          "credit": 325.46,
+          "tokens": 95221251,
+          "requests": 996
+        },
+        "space-bunny": {
+          "credit": 639.57,
+          "tokens": 472061792,
+          "requests": 2815
+        },
+        "step-5-preview": {
+          "credit": 0.0,
+          "tokens": 66893609,
+          "requests": 222
+        },
+        "minimax-m3.1-flash": {
+          "credit": 565.96,
+          "tokens": 140901142,
+          "requests": 1229
+        },
+        "hy4-preview": {
+          "credit": 0.0,
+          "tokens": 50040546,
+          "requests": 508
+        }
+      }
+    },
+    {
+      "code": "6004",
+      "reset_at": "2026-10-25 23:00:00",
+      "window_hours": 0.56,
+      "hits": 4,
+      "credit": 0,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "requests": 0,
+      "by_model": {},
+      "per_model_usage": {}
+    }
+  ],
+  "thresholds": {
+    "token_limit_M": 84.01,
+    "prompt_token_M": 82.96,
+    "credit_limit": 112.86,
+    "request_limit": 713.0,
+    "window_hours_median": 24.01,
+    "sample_windows": 28,
+    "method": "对所有 code∈{6000,6004} 的限流窗口取中位数；窗口边界由错误消息中的 reset 时刻重建"
+  },
+  "per_model_429": {
+    "hy4-preview": 53,
+    "hy3": 41,
+    "deepseek-v4.1-flash": 35,
+    "(未记录)": 32,
+    "glm-5.3-flash": 19,
+    "hy3-x": 11,
+    "deepseek-v4-flash": 8,
+    "glm-5.0-turbo": 1,
+    "mistral-medium-3": 1,
+    "mistral-large-latest": 1,
+    "glm-5.3": 1,
+    "glm-5.2": 1,
+    "MiniMaxAI/MiniMax-M3": 1
+  },
+  "per_model_credit": {
+    "deepseek-v4-flash": 2593.28,
+    "deepseek-v4.1-flash": 2031.21,
+    "hy3-x": 1609.1,
+    "glm-5.3-flash": 1181.74,
+    "space-bunny": 639.57,
+    "minimax-m3.1-flash": 565.96,
+    "hy4-preview": 461.56,
+    "glm-5.0-turbo": 168.08,
+    "deepseek-v4-pro": 108.48,
+    "glm-5.2": 87.37,
+    "hy3": 0.0,
+    "sensenova-6.8-flash-lite": 0.0,
+    "glm-4.6v": 0.0,
+    "glm-4.5-air": 0.0,
+    "mistral-large-latest": 0.0,
+    "mistral-medium-3": 0.0,
+    "glm-5.3": 0.0,
+    "MiniMaxAI/MiniMax-M3": 0.0,
+    "glm-4.7": 0.0,
+    "step-5-preview": 0.0
+  },
+  "per_model_tokens": {
+    "hy3": 2801818855,
+    "deepseek-v4.1-flash": 2184778290,
+    "deepseek-v4-flash": 1161831547,
+    "hy3-x": 480009541,
+    "space-bunny": 472061792,
+    "hy4-preview": 343826948,
+    "glm-5.3-flash": 331488758,
+    "minimax-m3.1-flash": 140901142,
+    "step-5-preview": 66893609,
+    "deepseek-v4-pro": 22407225,
+    "sensenova-6.8-flash-lite": 15542907,
+    "glm-4.6v": 7825941,
+    "glm-4.7": 5126158,
+    "glm-5.0-turbo": 3581522,
+    "glm-4.5-air": 3547262,
+    "glm-5.2": 1313190,
+    "glm-5.3": 607361,
+    "mistral-large-latest": 402673,
+    "MiniMaxAI/MiniMax-M3": 384655,
+    "mistral-medium-3": 90875
+  },
+  "totals": {
+    "requests_with_usage": 57445,
+    "total_credit": 9446.35,
+    "total_tokens": 8044440251,
+    "events_429": 205,
+    "files_scanned": 702
+  },
+  "per_model_limits": {
+    "hy3": {
+      "samples": 35,
+      "median_credit": 0.0,
+      "median_tokens_M": 20.31,
+      "median_requests": 214,
+      "max_credit": 0.0,
+      "max_tokens_M": 49.2
+    },
+    "deepseek-v4-flash": {
+      "samples": 3,
+      "median_credit": 399.52,
+      "median_tokens_M": 93.92,
+      "median_requests": 557,
+      "max_credit": 399.52,
+      "max_tokens_M": 93.92
+    },
+    "hy3-x": {
+      "samples": 4,
+      "median_credit": 26.61,
+      "median_tokens_M": 7.9,
+      "median_requests": 89.0,
+      "max_credit": 36.21,
+      "max_tokens_M": 16.21
+    },
+    "hy4-preview": {
+      "samples": 34,
+      "median_credit": 0.0,
+      "median_tokens_M": 28.62,
+      "median_requests": 160.5,
+      "max_credit": 0.0,
+      "max_tokens_M": 50.13
+    },
+    "glm-5.3-flash": {
+      "samples": 10,
+      "median_credit": 16.27,
+      "median_tokens_M": 3.96,
+      "median_requests": 46.5,
+      "max_credit": 789.65,
+      "max_tokens_M": 231.9
+    },
+    "deepseek-v4.1-flash": {
+      "samples": 35,
+      "median_credit": 211.32,
+      "median_tokens_M": 200.66,
+      "median_requests": 1553,
+      "max_credit": 211.32,
+      "max_tokens_M": 203.09
+    }
+  },
+  "per_model_limits_note": "每个模型的限额由「该模型触发 429 时的滚动窗口内自身消耗」取中位数得到，属限额下界估计；样本数少的模型可信度低，需实际触发后校准。"
+}
