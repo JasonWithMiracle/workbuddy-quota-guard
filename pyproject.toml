@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "workbuddy-quota-guard"
-version = "1.0.0"
+version = "1.0.1"
 description = "WorkBuddy/CodeBuddy 配额感知器：反推各模型 429 限额、预警剩余额度、生成断点交接文档"
 readme = "README.md"
 license = { text = "MIT" }

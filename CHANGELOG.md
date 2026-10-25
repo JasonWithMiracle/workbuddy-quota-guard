@@ -2,6 +2,26 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.0.1] - 2026-10-25
+
+修复 v1.0.0 发布时暴露的 CI 配置缺陷。**不含功能变更**，分析引擎与产物格式完全不变。
+
+### 修复
+
+- **CI：Python 3.9 任务在 Set up Python 步骤失败**
+  根因：GitHub 默认 runner 已切换到 `ubuntu-26.04`，而 `actions/python-versions` 中 Python 3.9–3.13 均无 26.04 的 linux/x64 构建（3.9 仅有 20.04 / 22.04 / 24.04），`setup-python` 直接报 not found。
+  修法：测试矩阵改为 `include` 形式并显式钉住 `ubuntu-24.04`。
+  说明：源码本身无 `match` 语句、无 PEP 604 联合类型、无 3.10+ 专属 API，属纯环境问题。
+
+- **CI：Privacy hygiene 任务误报**
+  根因：shell 正则把 `JasonWithMiracle` 当作隐私标识拦截，但它只是公开仓库的作者署名与仓库 URL，命中 `docs/roadmap.md`、`skill/使用说明.md` 均为正常内容。
+  修法：抽为 `scripts/hygiene_check.py`，白名单式精确匹配 Windows / macOS / Linux 用户目录绝对路径、vault 本机路径、账号 UUID 与密钥字面量；该脚本可本地直接运行复现，不再依赖 shell 正则。
+
+### 变更
+
+- Hook 脚本 `hooks/quota-precheck.js` 改为路径自适应：Skill 安装目录与仓库目录均可定位分析脚本
+- README 补充 CI 状态 badge
+
 ## [1.0.0] - 2026-10-25
 
 首个公开版本。

@@ -5,6 +5,7 @@
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![deps](https://img.shields.io/badge/dependencies-0-brightgreen)
+[![CI](https://github.com/JasonWithMiracle/workbuddy-quota-guard/actions/workflows/ci.yml/badge.svg)](https://github.com/JasonWithMiracle/workbuddy-quota-guard/actions/workflows/ci.yml)
 
 ---
 

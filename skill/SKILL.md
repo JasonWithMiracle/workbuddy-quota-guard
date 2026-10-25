@@ -6,7 +6,7 @@ description_zh: "WorkBuddy/CodeBuddy 配额感知器：反推各模型 429 限�
 description_en: "WorkBuddy/CodeBuddy quota guard: reverse-engineer per-model 429 limits, estimate remaining quota, generate handoff docs and dashboards."
 agent_created: true
 type: tool
-version: "1.0.0"
+version: "1.0.1"
 license: MIT
 ---
 

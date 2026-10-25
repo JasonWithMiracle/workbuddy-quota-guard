@@ -6,7 +6,7 @@
 只读分析，不修改 WorkBuddy 的任何数据。
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __all__ = ["core", "report", "cli"]
 
 
