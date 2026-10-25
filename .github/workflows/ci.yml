@@ -9,11 +9,20 @@ on:
 jobs:
   python:
     name: Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        include:
+          # 说明：GitHub 默认 runner 已切换到 ubuntu-26.04，而 Python 3.9–3.13
+          # 在 actions/python-versions 中没有 26.04 的 linux/x64 构建
+          # （3.9 仅有 20.04 / 22.04 / 24.04），故显式指定 ubuntu-24.04。
+          # 3.9 已进入 EOL，若未来移除该构建可直接删掉对应条目。
+          - { python-version: "3.9",  os: "ubuntu-24.04" }
+          - { python-version: "3.10", os: "ubuntu-24.04" }
+          - { python-version: "3.11", os: "ubuntu-24.04" }
+          - { python-version: "3.12", os: "ubuntu-24.04" }
+          - { python-version: "3.13", os: "ubuntu-24.04" }
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +33,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Byte-compile all sources
-        run: |
-          python -m compileall -q src skill/scripts
+        run: python -m compileall -q src skill/scripts
 
       - name: Import smoke test
         run: |
@@ -42,12 +50,10 @@ jobs:
           "
 
       - name: CLI help works
-        run: |
-          PYTHONPATH=src python -m wb_quota_guard --help
+        run: PYTHONPATH=src python -m wb_quota_guard --help
 
       - name: Skill entrypoint works
-        run: |
-          python skill/scripts/quota_guard.py --help
+        run: python skill/scripts/quota_guard.py --help
 
       - name: Install package
         run: |
@@ -57,7 +63,7 @@ jobs:
 
   node:
     name: Hook syntax check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -68,21 +74,10 @@ jobs:
 
   hygiene:
     name: Privacy hygiene
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Ensure no local artifacts are committed
-        run: |
-          for f in limits.json status.json handoff.md quota_report.html; do
-            if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
-              echo "::error::local artifact committed: $f"
-              exit 1
-            fi
-          done
-      - name: Ensure no personal paths in tracked source
-        run: |
-          if git grep -nIE 'C:\\\\Users|/Users/[a-z]|JasonWithMiracle|097bc327' -- src skill hooks docs; then
-            echo "::error::personal identifier found in tracked source"
-            exit 1
-          fi
-          echo "clean"
+      - name: Repository hygiene check
+        # 检查项：本地产物未入库 / 无本机绝对路径 / 无账号 UUID / 无密钥字面量
+        # 详见 scripts/hygiene_check.py 顶部说明
+        run: python scripts/hygiene_check.py
