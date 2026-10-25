@@ -212,6 +212,29 @@ workbuddy-quota-guard/
 - 其他平台（如 CodeBuddy CLI）的适配；
 - 真实剩余额度接口的可行方案。
 
+本地改动请先跑一遍自检（与 CI 完全一致）：
+
+```bash
+python scripts/hygiene_check.py    # 隐私卫生
+python -m compileall -q src/ scripts/
+node --check hooks/quota-precheck.js
+```
+
+### 发布流程（维护者）
+
+> ⚠️ **顺序不可颠倒**：tag 是指向 commit 的不可变引用，一旦打好就固化了该 commit 的全部状态。
+
+```
+① 提交全部改动
+② 推分支，等远端 CI 全绿（必须确认，不是「应该会绿」）
+③ 确认绿了，再打 tag：git tag -a vX.Y.Z
+④ 推 tag + 建 Release
+```
+
+若发现 tag 已指向有缺陷的 commit：**用补丁版本收口，不要 force-push tag**。
+移动已发布 tag 等于改写发布历史（GitHub 会让旧 tag 变成悬空引用，已下载者无从感知），
+正确做法是发 `vX.Y.(Z+1)` 并在旧 Release 的说明里追加升级提示。
+
 ---
 
 ## License

@@ -21,6 +21,8 @@
 
 - Hook 脚本 `hooks/quota-precheck.js` 改为路径自适应：Skill 安装目录与仓库目录均可定位分析脚本
 - README 补充 CI 状态 badge
+- README「贡献」章节补充**维护者发布流程**，明确「CI 全绿后才能打 tag」，
+  以及「已发布 tag 有缺陷时用补丁版本收口、不 force-push tag」的处置方式
 
 ## [1.0.0] - 2026-10-25
 
